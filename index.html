@@ -1,345 +1,163 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Chris的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Chris的博客 - CHRIS学习记录</title><meta name="author" content="Chris"><meta name="copyright" content="Chris"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CHRIS学习记录">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Chris的博客">
 <meta property="og:url" content="https://wxt6666.github.io/index.html">
 <meta property="og:site_name" content="Chris的博客">
+<meta property="og:description" content="CHRIS学习记录">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxt6666.github.io/img/butterfly-icon.png">
 <meta property="article:author" content="Chris">
+<meta property="article:tag" content="Iot security">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Chris的博客" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chris的博客</a>
-      </h1>
+<meta name="twitter:image" content="https://wxt6666.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wxt6666.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">CHRIS</a>
-        </h2>
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Chris的博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-10-12 15:06:29'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chris的博客</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Chris的博客</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向">通信和固件安全方向</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-12T06:46:13.998Z" title="发表于 2024-10-12 14:46:13">2024-10-12</time></span></div><div class="content">车联网入侵检测与固件漏洞挖掘集成系统1. 基于车联网场景的入侵检测1.1 入侵检测系统设计与架构 车联网入侵检测系统（IDS）： 监控车联网通信流量，识别异常行为和潜在攻击。 利用机器学习和深度学习技术建立基线模型，检测不同类型的攻击，如DoS、信号篡改、伪造身份等。 支持分布式和集中式部署，结合云端和边缘节点进行实时分析。    1.2 车联网中关键攻击场景与应对策略 V2V通信中的入侵检测： 通过监控车辆之间的数据包交换，检测伪造或篡改的通信数据。 基于网络行为分析的异常检测，识别恶意节点。   V2I通信中的入侵检测： 监控车辆与路侧单元（RSU）之间的通信流量，防止中继攻击或信号劫持。   车内通信入侵检测： 监控CAN总线、LIN总线等车内网络，检测恶意的控制命令和异常通信行为。    1.3...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/10/12/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-12T05:41:03.016Z" title="发表于 2024-10-12 13:41:03">2024-10-12</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Chris</div><div class="author-info-description">CHRIS学习记录</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向">通信和固件安全方向</a><time datetime="2024-10-12T06:46:13.998Z" title="发表于 2024-10-12 14:46:13">2024-10-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/12/hello-world/" title="Hello World">Hello World</a><time datetime="2024-10-12T05:41:03.016Z" title="发表于 2024-10-12 13:41:03">2024-10-12</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wxt6666.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
+    <ul class="card-archive-list">
   
-    <article id="post-车联网入侵检测与固件漏洞挖掘集成系统 10.11" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" class="article-date">
-  <time class="dt-published" datetime="2024-10-12T06:46:13.998Z" itemprop="datePublished">2024-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="车联网入侵检测与固件漏洞挖掘集成系统"><a href="#车联网入侵检测与固件漏洞挖掘集成系统" class="headerlink" title="车联网入侵检测与固件漏洞挖掘集成系统"></a>车联网入侵检测与固件漏洞挖掘集成系统</h1><h2 id="1-基于车联网场景的入侵检测"><a href="#1-基于车联网场景的入侵检测" class="headerlink" title="1. 基于车联网场景的入侵检测"></a>1. 基于车联网场景的入侵检测</h2><h3 id="1-1-入侵检测系统设计与架构"><a href="#1-1-入侵检测系统设计与架构" class="headerlink" title="1.1 入侵检测系统设计与架构"></a>1.1 入侵检测系统设计与架构</h3><ul>
-<li><strong>车联网入侵检测系统（IDS）</strong>：<ul>
-<li>监控车联网通信流量，识别异常行为和潜在攻击。</li>
-<li>利用机器学习和深度学习技术建立基线模型，检测不同类型的攻击，如DoS、信号篡改、伪造身份等。</li>
-<li>支持分布式和集中式部署，结合云端和边缘节点进行实时分析。</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-2-车联网中关键攻击场景与应对策略"><a href="#1-2-车联网中关键攻击场景与应对策略" class="headerlink" title="1.2 车联网中关键攻击场景与应对策略"></a>1.2 车联网中关键攻击场景与应对策略</h3><ul>
-<li><strong>V2V通信中的入侵检测</strong>：<ul>
-<li>通过监控车辆之间的数据包交换，检测伪造或篡改的通信数据。</li>
-<li>基于网络行为分析的异常检测，识别恶意节点。</li>
-</ul>
-</li>
-<li><strong>V2I通信中的入侵检测</strong>：<ul>
-<li>监控车辆与路侧单元（RSU）之间的通信流量，防止中继攻击或信号劫持。</li>
-</ul>
-</li>
-<li><strong>车内通信入侵检测</strong>：<ul>
-<li>监控CAN总线、LIN总线等车内网络，检测恶意的控制命令和异常通信行为。</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-入侵检测技术"><a href="#1-3-入侵检测技术" class="headerlink" title="1.3 入侵检测技术"></a>1.3 入侵检测技术</h3><ul>
-<li><strong>流量分析与检测</strong>：<ul>
-<li>利用深度包检测（DPI）对车联网通信流量进行细粒度分析，识别恶意数据包。</li>
-<li>通过协议解析发现不符合协议规范的行为，检测伪造数据包和协议攻击。</li>
-</ul>
-</li>
-<li><strong>行为分析</strong>：<ul>
-<li>基于车辆行为模式分析，识别驾驶异常和控制异常行为，如突然加速或异常制动。</li>
-<li>实时监控车辆与外部系统的交互，检测异常访问请求或身份冒充攻击。</li>
-</ul>
-</li>
-<li><strong>AI驱动的入侵检测</strong>：<ul>
-<li>利用机器学习与深度学习模型，基于历史数据训练异常检测系统，提高检测准确率。</li>
-<li>采用监督学习和无监督学习结合，增强对已知和未知威胁的检测能力。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-固件漏洞挖掘"><a href="#2-固件漏洞挖掘" class="headerlink" title="2. 固件漏洞挖掘"></a>2. 固件漏洞挖掘</h2><h3 id="2-1-固件漏洞挖掘技术"><a href="#2-1-固件漏洞挖掘技术" class="headerlink" title="2.1 固件漏洞挖掘技术"></a>2.1 固件漏洞挖掘技术</h3><ul>
-<li><strong>静态分析</strong>：<ul>
-<li>对车联网固件进行静态分析，通过反编译技术检测潜在的漏洞，如缓冲区溢出、越界写入等。</li>
-<li>利用符号执行技术生成程序路径，探索可能的漏洞触发条件。</li>
-</ul>
-</li>
-<li><strong>动态模糊测试</strong>：<ul>
-<li>通过动态测试对固件进行模糊测试，输入大量随机或异常数据，检测程序在运行时的异常行为和漏洞。</li>
-<li>结合硬件在环（HIL）仿真技术进行固件动态行为测试，模拟真实运行环境中的攻击。</li>
-</ul>
-</li>
-<li><strong>逆向工程</strong>：<ul>
-<li>对固件进行逆向工程，分析其逻辑结构和加密算法，挖掘加密密钥存储、认证漏洞等。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-2-车联网核心组件固件安全"><a href="#2-2-车联网核心组件固件安全" class="headerlink" title="2.2 车联网核心组件固件安全"></a>2.2 车联网核心组件固件安全</h3><ul>
-<li><strong>ECU固件漏洞挖掘</strong>：<ul>
-<li>通过静态分析与动态测试，挖掘ECU固件中的潜在漏洞，如未经授权的命令执行、固件反向工程等。</li>
-<li>分析CAN总线上的通信模式，检测利用ECU漏洞的攻击行为。</li>
-</ul>
-</li>
-<li><strong>T-box固件漏洞挖掘</strong>：<ul>
-<li>动态分析T-box固件的网络通信模块，挖掘远程控制、未授权访问等漏洞。</li>
-<li>通过监控T-box与外部网络的通信数据，识别不安全的更新机制。</li>
-</ul>
-</li>
-<li><strong>IVI固件漏洞挖掘</strong>：<ul>
-<li>对IVI系统的固件进行静态和动态分析，检测外部接口（如蓝牙、WiFi）的漏洞。</li>
-<li>检测IVI与其他车载系统的交互，防止通过IVI系统传播的恶意软件攻击。</li>
-</ul>
-</li>
-<li><strong>ADAS固件漏洞挖掘</strong>：<ul>
-<li><p>分析ADAS固件的传感器数据处理逻辑，检测虚假传感器数据输入导致的漏洞。</p>
-</li>
-<li><p>检测ADAS固件的决策机制，防止攻击者利用漏洞操控车辆的自动驾驶功能。</p>
-<img src="D:\桌面\微信截图_20241011131307.png" alt="微信截图_20241011131307" style="zoom:50%;" /></li>
-</ul>
-</li>
-</ul>
-<h3 id="2-3-固件更新的安全性"><a href="#2-3-固件更新的安全性" class="headerlink" title="2.3 固件更新的安全性"></a>2.3 固件更新的安全性</h3><ul>
-<li><strong>OTA更新安全机制</strong>：<ul>
-<li>设计安全的固件更新方案，使用数字签名和证书验证机制，确保OTA更新的合法性。</li>
-<li>结合区块链技术，实现更新过程的去中心化验证，防止中间人攻击或篡改更新包。</li>
-</ul>
-</li>
-<li><strong>固件完整性验证</strong>：<ul>
-<li>使用哈希值、加密校验等技术，确保固件的完整性，防止被恶意篡改或替换。</li>
-<li>在固件运行时，实时监控固件行为，检测异常行为并防止利用漏洞进行攻击。</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-车联网入侵检测与固件漏洞挖掘的结合"><a href="#3-车联网入侵检测与固件漏洞挖掘的结合" class="headerlink" title="3. 车联网入侵检测与固件漏洞挖掘的结合"></a>3. 车联网入侵检测与固件漏洞挖掘的结合</h2><h3 id="3-1-集成安全框架"><a href="#3-1-集成安全框架" class="headerlink" title="3.1 集成安全框架"></a>3.1 集成安全框架</h3><ul>
-<li>通过固件漏洞挖掘与入侵检测结合，实时监控车联网中固件的行为及通信流量，提升入侵检测的准确性。</li>
-<li>固件漏洞的发现能够为入侵检测提供新的攻击模式与行为特征，增强IDS对新型攻击的检测能力。</li>
-</ul>
-<h3 id="3-2-固件异常行为检测"><a href="#3-2-固件异常行为检测" class="headerlink" title="3.2 固件异常行为检测"></a>3.2 固件异常行为检测</h3><ul>
-<li>利用固件漏洞挖掘的结果，在入侵检测系统中设置固件行为基线，监控固件的异常操作，如未授权的固件更新、异常的远程控制请求等。</li>
-<li>通过异常检测算法，结合网络流量分析与固件行为检测，快速识别攻击者利用固件漏洞发起的攻击。</li>
-</ul>
-<h3 id="3-3-固件漏洞补丁与防御机制"><a href="#3-3-固件漏洞补丁与防御机制" class="headerlink" title="3.3 固件漏洞补丁与防御机制"></a>3.3 固件漏洞补丁与防御机制</h3><ul>
-<li>入侵检测系统可以监控固件漏洞的补丁部署，确保补丁更新的安全性。</li>
-<li>在固件未及时更新或修复时，IDS可以通过网络隔离、流量过滤等方式，阻止攻</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wxt6666.github.io/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" data-id="cm25sq7700001xsf60vjo2osd" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/12/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-10-12T05:41:03.016Z" itemprop="datePublished">2024-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://wxt6666.github.io/2024/10/12/hello-world/" data-id="cm25sq76x0000xsf6ee3uddoc" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/12/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 Chris<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/10/">
+          <span class="card-archive-list-date">十月 2024</span>
+          <span class="card-archive-list-count">2</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-10-12T07:06:29.845Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Chris</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
