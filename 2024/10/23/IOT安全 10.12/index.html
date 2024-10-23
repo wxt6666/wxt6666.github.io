@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>IOT安全 | 好好学习 天天向上</title><meta name="author" content="Chris"><meta name="copyright" content="Chris"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="物联网介绍什么是物联网？物联网是关于三件重要的事情1. 自动化： 坦率地说人都是懒惰的，未来就是让我们变得更懒惰并自动化我们目前手动完成的任何事情。2. 虚拟世界与物理世界之间的接口：在物理世界和虚拟世界之间架起一座桥梁。简单来说，允许虚拟世界从&#x2F;向物理世界读取和写入。当我说读取时，我的意思是感知物理环境并将状态转换为数据并将其发送到虚拟数据存储以进行进一步分析，例如温度传感器、医疗传感">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOT安全">
+<meta property="og:url" content="https://wxt6666.github.io/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/index.html">
+<meta property="og:site_name" content="好好学习 天天向上">
+<meta property="og:description" content="物联网介绍什么是物联网？物联网是关于三件重要的事情1. 自动化： 坦率地说人都是懒惰的，未来就是让我们变得更懒惰并自动化我们目前手动完成的任何事情。2. 虚拟世界与物理世界之间的接口：在物理世界和虚拟世界之间架起一座桥梁。简单来说，允许虚拟世界从&#x2F;向物理世界读取和写入。当我说读取时，我的意思是感知物理环境并将状态转换为数据并将其发送到虚拟数据存储以进行进一步分析，例如温度传感器、医疗传感">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxt6666.github.io/img/123.jpg">
+<meta property="article:published_time" content="2024-10-23T08:55:54.036Z">
+<meta property="article:modified_time" content="2024-10-23T09:33:20.522Z">
+<meta property="article:author" content="Chris">
+<meta property="article:tag" content="物联网">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxt6666.github.io/img/123.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wxt6666.github.io/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'IOT安全',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-23 17:33:20'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/222.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1023.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 友链</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/123.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">好好学习 天天向上</span></a><a class="nav-page-title" href="/"><span class="site-name">IOT安全</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 友链</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">IOT安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-23T08:55:54.036Z" title="发表于 2024-10-23 16:55:54">2024-10-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-23T09:33:20.522Z" title="更新于 2024-10-23 17:33:20">2024-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%89%A9%E8%81%94%E7%BD%91/">物联网</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="物联网介绍"><a href="#物联网介绍" class="headerlink" title="物联网介绍"></a>物联网介绍</h2><h3 id="什么是物联网？"><a href="#什么是物联网？" class="headerlink" title="什么是物联网？"></a>什么是物联网？</h3><p>物联网是关于三件重要的事情<br><strong>1. 自动化：</strong> 坦率地说人都是懒惰的，未来就是让我们变得更懒惰并自动化我们目前手动完成的任何事情。<br><strong>2. 虚拟世界与物理世界之间的接口</strong>：在物理世界和虚拟世界之间架起一座桥梁。简单来说，允许虚拟世界从&#x2F;向物理世界读取和写入。当我说读取时，我的意思是感知物理环境并将状态转换为数据并将其发送到虚拟数据存储以进行进一步分析，例如温度传感器、医疗传感器、相机等。 写入是指通过动作来控制物理世界的方法，即将数据转换为物理世界上的动作，例如门锁、控制车辆操作、喷水、医疗泵等。<br><strong>3. 信息收集和决策制定：</strong> 可以实时分析从设备收集的数据，以更好地了解环境、对某些事件采取行动、找出任何物理世界问题的根本原因等。</p>
+<h3 id="哪里使用了物联网？"><a href="#哪里使用了物联网？" class="headerlink" title="哪里使用了物联网？"></a>哪里使用了物联网？</h3><p><strong>智能家居</strong>：</p>
+<ul>
+<li>设备如智能灯泡、恒温器、安防系统、智能音箱等通过互联网连接，可以远程控制和监测。用户可以使用手机控制家中的设备，调整温度、查看摄像头画面或管理用电。</li>
+</ul>
+<p><strong>智能城市</strong>：</p>
+<ul>
+<li>包括智能交通灯、智能停车系统、城市照明、废物管理等，通过物联网设备实时监测和控制城市基础设施，提高资源利用率和生活质量。</li>
+</ul>
+<p><strong>医疗健康</strong>：</p>
+<ul>
+<li>远程健康监控设备（如智能手表、健康追踪器）可以跟踪佩戴者的健康数据，帮助医生远程诊断和管理病人的健康。还有用于医院的物联网设备，帮助追踪医疗设备和药品库存。</li>
+</ul>
+<p><strong>工业物联网（IIoT）</strong>：</p>
+<ul>
+<li>工厂设备、传感器和机械设备连接到互联网，可以实时监测设备状态、优化生产流程，进行预测性维护，减少设备故障。</li>
+</ul>
+<p><strong>智能农业</strong>：</p>
+<ul>
+<li>通过传感器和物联网平台，农民可以监测土壤湿度、天气条件、植物健康等数据，优化灌溉和施肥，提升农作物产量。</li>
+</ul>
+<p><strong>车联网</strong>：</p>
+<ul>
+<li>汽车连接到互联网，实现导航、远程监控、车队管理、智能交通服务等功能。例如，自动驾驶汽车使用传感器和通信系统与道路基础设施和其他车辆进行实时交互。</li>
+</ul>
+<p><strong>供应链和物流</strong>：</p>
+<ul>
+<li>物联网技术帮助实时追踪货物、优化运输路线、监控货物环境（如温度、湿度），确保供应链的高效运作和货物安全。</li>
+</ul>
+<hr>
+<h2 id="物联网攻击面"><a href="#物联网攻击面" class="headerlink" title="物联网攻击面"></a>物联网攻击面</h2><p>​		了解物联网和物联网架构的含义后。现在我们将开始进入安全领域，并尝试定义一种方法来理解和创建结构化流程来执行物联网的安全研究或渗透测试。<br>​		如果我们查看上一篇文章中定义的架构，现在我们可以轻松的对物联网进行拆分并尝试为每个组件单独定义攻击面，然后将它们组合起来以创建整个物联网生态系统攻击面。我称其为 IoT 生态系统而不是 IoT 产品，因为它确实是一个由不同组件相互通信并解决特定现实世界问题的生态系统。下面将继续定义物联网生态系统的攻击面，并详细讨论每个组件的攻击面。按组件的攻击面可以将物联网组件攻击面分为三个或四个（如果我们将通信作为攻击面），主要攻击面如下：</p>
+<ul>
+<li>移动应用</li>
+<li>云</li>
+<li>通信</li>
+<li>物联网终端设备</li>
+</ul>
+<h3 id="移动应用"><a href="#移动应用" class="headerlink" title="移动应用"></a>移动应用</h3><p>​		移动应用是物联网的重要用户界面之一，用户可以通过它感知物理世界的状态。由于移动应用程序与物联网生态系统以发送命令和读取数据形式进行通信，因此它成为进入物联网生态系统的切入点之一。我们将尝试从物联网的角度列举移动设备的攻击面。</p>
+<ul>
+<li><p>数据存储</p>
+</li>
+<li><p>授权认证</p>
+</li>
+<li><p>数据加密</p>
+</li>
+<li><p>通信</p>
+</li>
+<li><p>移动应用通用漏洞 – OWASP Mobile Top 10 </p>
+<ul>
+<li><p>不安全的身份验证（Improper Platform Usage）</p>
+</li>
+<li><p>不安全的数据存储（Insecure Data Storage）</p>
+</li>
+<li><p>不安全的通信（Insecure Communication）</p>
+</li>
+<li><p>不安全的身份验证（Insecure Authentication）</p>
+</li>
+<li><p>不安全的授权（Insecure Authorization）</p>
+</li>
+<li><p>不安全的代码质量（Insecure Code Quality）</p>
+</li>
+<li><p>不安全的代码反向工程（Reverse Engineering）</p>
+</li>
+<li><p>不安全的代码注入（Code Tampering）</p>
+</li>
+<li><p>不安全的功能配置（Improper Security Configuration）</p>
+</li>
+<li><p>不安全的外部库和组件（Extraneous Functionality）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="云"><a href="#云" class="headerlink" title="云"></a>云</h3><p>云是物联网中非常重要的部分之一，通常来自物联网产品线所有实例的数据都汇聚在这里。这使它成为一个非常有趣的攻击点。请记住，我在上一篇文章中提到物联网不仅与硬件有关。原因是云将保存所有部署的物联网实例的数据，并有权向所有实例发送命令。通常命令是由用户发起的，但是如果受到攻击，攻击者将获得对部署在全球范围内的设备（及其数据）的控制权，这很危险。总体而言，攻击面侧重于它提供的接口，其中包括</p>
+<ul>
+<li>数据存储</li>
+<li>授权认证</li>
+<li>数据加密</li>
+<li>通信</li>
+<li>应用接口</li>
+<li>通用 Web&#x2F;云漏洞 – OWASP Web Top 10</li>
+</ul>
+<h3 id="终端设备"><a href="#终端设备" class="headerlink" title="终端设备"></a>终端设备</h3><p>接下来是设备，它是物联网技术的游戏规则改变者 :)。它与物理世界交互，也与虚拟世界通信。它是物理世界数据的第一站。鉴于其存储的用户的敏感数据（例如家庭数据、身体统计数据、个人信息），围绕用户隐私展开了一场全面的竞争。未来设备可能会直接通过钱包或单独的临时钱包使用用户的加密货币来购买物品、进行维修等。 攻击面如下所示</p>
+<ul>
+<li>数据存储</li>
+<li>授权认证</li>
+<li>数据加密</li>
+<li>通信</li>
+<li>传感器接口</li>
+<li>外围接口</li>
+<li>硬件接口</li>
+<li>人机接口</li>
+</ul>
+<h3 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h3><p>尽管这不是一个有形的攻击面，因为理想情况下有形的攻击面是通信接口和负责通信的相应驱动程序、固件。然而，通信却需要单独列出来，因为物联网生态系统可以在有线和无线介质上使用的各种各样的通信协议。下面是部分通信攻击面。</p>
+<ul>
+<li>授权认证</li>
+<li>数据加密</li>
+<li>使用非标准通信协议</li>
+<li>通信协议实现错误</li>
+</ul>
+<p>硬件接口承载实际通信。然而，实际的通信数据&#x2F;数据包是由在软件中实现的定义的。因此，在这个攻击面（通信）中，我们将只讨论协议。尽管协议中的缺陷可能实际发生在移动应用、设备或云上的协议端点的攻击，但为了清楚起见，我们将其保留为单独的攻击面。此处的列表中有太多协议标准无法提及。但是，我们将列出各种 IoT 产品中使用的一些&#x3D;&#x3D;常见协议&#x3D;&#x3D;。</p>
+<ul>
+<li><p>Web或技术术语 HTTP(S) 是最常用的通信协议</p>
+</li>
+<li><p>CoAP – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Constrained_Application_Protocol">https://en.wikipedia.org/wiki/Constrained_Application_Protocol </a></p>
+</li>
+<li><p>MQTT - <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MQTT">https://en.wikipedia.org/wiki/MQTT </a></p>
+</li>
+<li><p>AMQP – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol">https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol </a></p>
+</li>
+<li><p>WebSocket – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/WebSocket">https://en.wikipedia.org/wiki/WebSocket </a></p>
+</li>
+<li><p>CANbus - <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/CAN_bus">https://en.wikipedia.org/wiki/CAN_bus </a></p>
+</li>
+<li><p>Modbus – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Modbus">https://en.wikipedia.org/wiki/Modbus </a></p>
+</li>
+<li><p>Profibus – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Profibus">https://en.wikipedia.org/wiki/Profibus </a></p>
+</li>
+<li><p>DNP3 – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/DNP3">https://en.wikipedia.org/wiki/DNP3 </a></p>
+</li>
+<li><p>BACNet – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/BACnet">https://en.wikipedia.org/wiki/BACnet </a></p>
+</li>
+<li><p>HL7 – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Health_Level_7">https://en.wikipedia.org/wiki/Health_Level_7 </a></p>
+</li>
+<li><p>XMPP – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/XMPP">https://en.wikipedia.org/wiki/XMPP </a></p>
+</li>
+<li><p>UPnP – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Universal_Plug_and_Play">https://en.wikipedia.org/wiki/Universal_Plug_and_Play </a></p>
+</li>
+<li><p>DNS</p>
+</li>
+<li><p>SSH</p>
+</li>
+<li><p>&lt;其他&gt;🙂</p>
+</li>
+</ul>
+<hr>
+<h2 id="物联网设备攻击面（终端设备）"><a href="#物联网设备攻击面（终端设备）" class="headerlink" title="物联网设备攻击面（终端设备）"></a>物联网设备攻击面（终端设备）</h2><h3 id="1-数据存储"><a href="#1-数据存储" class="headerlink" title="1. 数据存储"></a>1. 数据存储</h3><p>设备使用的存储。这可以进一步分为内部和外部、持久性和易失性。</p>
+<h4 id="1-1-SD-卡"><a href="#1-1-SD-卡" class="headerlink" title="1.1 SD 卡"></a>1.1 SD 卡</h4><p>​		SD 卡通常用于存储配置和产品数据。它们也可用于存储固件更新。这是一个非常有趣的攻击面。</p>
+<h4 id="1-2-USB"><a href="#1-2-USB" class="headerlink" title="1.2 USB"></a>1.2 USB</h4><p>​		某些产品可能使用 USB 驱动器来存储与 SD 卡中类似的数据，以及读取下载或存储在 USB 驱动器上的数据。与 SD 卡类似的攻击适用于 USB 存储设备。</p>
+<h4 id="1-3-非易失性存储器"><a href="#1-3-非易失性存储器" class="headerlink" title="1.3 非易失性存储器"></a>1.3 非易失性存储器</h4><p>​		非易失性存储器功能很多，包括读&#x2F;写传感器数据、引导加载程序、固件、凭据、密钥等。在测试硬件板时，查看存储在芯片上的数据至关重要。我们还可以对存储器和微控制器之间的通信进行运行时分析，以分析在不同操作期间存储&#x2F;读取的数据类型，可以通过让逻辑分析仪嗅探总线通信来实现的。您可以在触发设备上的特定操作时发现正在读取&#x2F;写入的有趣数据。有以下不同类型的内存芯片：</p>
+<ul>
+<li>只读存储器EPROM</li>
+<li>电可擦可编程只读存储器EEPROM</li>
+<li>&#x3D;&#x3D;FLASH&#x3D;&#x3D; – 由于其速度和效率而更常用</li>
+</ul>
+<img src="D:\桌面\每日学习\笔记\flash.png" style="zoom:50%;" />
+
+<h4 id="1-4-易失性内存"><a href="#1-4-易失性内存" class="headerlink" title="1.4 易失性内存"></a>1.4 易失性内存</h4><p>​		说到易失性存储器，我们脑海中立刻就会浮现出 RAM 这个词。它们广泛用于 PC 和嵌入式系统，并在运行时保存代码和数据。设备断电时数据丢失。一些常见的RAM类型如下</p>
+<ul>
+<li>SRAM（Static Random Access Memory 静态随机存取存储器）——一种 RAM，用于保存芯片断电时丢失的数据。</li>
+<li>DRAM（Dynamic Random Access Memory 动态随机存取存储器）——数据会保留一段时间，之后数据会丢失，除非在运行时刷新。这意味着与 SRAM 相比，即使在芯片通电期间，数据的寿命也很短。芯片断电时数据也会丢失。</li>
+</ul>
+<h4 id="1-5-微控制器内部存储器"><a href="#1-5-微控制器内部存储器" class="headerlink" title="1.5 微控制器内部存储器"></a>1.5 微控制器内部存储器</h4><p>​		微控制器也有自己的内部存储器，通常用于存储代码。在调试微控制器时通常可以访问这些存储器，例如通过 JTAG 进行调试。微控制器中使用的各种存储器是：</p>
+<ul>
+<li>SRAM</li>
+<li>EEPROM</li>
+<li>FLASH</li>
+</ul>
+<h3 id="2-硬件通讯接口（不懂？？？）"><a href="#2-硬件通讯接口（不懂？？？）" class="headerlink" title="2. 硬件通讯接口（不懂？？？）"></a>2. 硬件通讯接口（不懂？？？）</h3><p>同一块板上的不同硬件组件需要相互通信并与外界通信。所有这些通信都是使用定义明确的标准硬件通信协议完成的。从攻击者的角度来看，它通过嗅探或注入恶意数据让他们深入了解实际通信。分析下面提到的一些最常见的接口以查找安全问题。</p>
+<h4 id="2-1-UART串口"><a href="#2-1-UART串口" class="headerlink" title="2.1 UART串口"></a>2.1 UART串口</h4><p>UART (Universal Asynchronous Receiver Transmitter) 是一个硬件组件，允许两个硬件外设之间进行异步串行通信。它们可以在同一块板上（例如微控制器与电机或 LED 屏幕通信）或两个不同设备之间（例如设备微控制器与 PC 通信）。这是一个有趣的攻击面，因为它可能允许通过串行方式对设备进行读&#x2F;写访问。在许多设备中，板上的 UART 端口保持打开状态，任何人都可以通过串行连接和访问以获取某种类型的控制台，即简单的 shell、自定义命令行控制台、日志输出等。一个设备通常会有一组引脚-输出连接到微控制器 UART RX 和 TX 引脚，用于发送和接收串行数据。</p>
+<h4 id="2-2-微控制器调试口"><a href="#2-2-微控制器调试口" class="headerlink" title="2.2 微控制器调试口"></a>2.2 微控制器调试口</h4><p>微控制器可以在运行时使用连接到板上引脚输出的指定引脚进行调试。开发人员和设计人员使用这些引脚输出（端口）来调试、读&#x2F;写固件和微控制器内部存储器、控制&#x2F;测试微控制器引脚后期生产。考虑到它为攻击者提供的能力和访问权限，这使得调试端口成为最关键的攻击面之一。有一些用于此目的的标准接口如下：</p>
+<p><strong>1. JTAG（Joint Test Action Group）：</strong> 随着微控制器和 PCB 变得越来越小，生产后很难对其进行测试。因此，为了在生产后有效地测试电路板，电子行业创建了一个同名协会，并定义了一种在生产后测试电路板的方法。它后来被改编为 IEEE 标准 1149.1。<code>JTAG</code> 协议定义了可用于测试和调试微控制器的标准接口和命令。<code>JTAG</code> 定义了四个引脚接口（和一个额外的可选引脚 TRST）：</p>
+<ul>
+<li>TMS – 测试模式选择</li>
+<li>TCK - 测试时钟</li>
+<li>TDI – 测试数据输入</li>
+<li>TDO – 测试数据输出</li>
+<li>TRST – 测试复位（可选引脚）</li>
+</ul>
+<p>除了测试芯片外，调试器还使用这些引脚与微控制器上实现的 TAP（测试访问端口）进行通信。从安全角度来看，识别 JTAG 端口并与其连接允许攻击者提取固件、对逻辑进行逆向工程并在设备上写入恶意固件。在以后的文章中会详细介绍。</p>
+<p><strong>2. cJTAG（Compact JTAG）：</strong> 这是IEEE 1149.7标准中定义的新JTAG协议。它不会取代 1149.1 标准，而是进一步扩展了它，并且向后兼容 JTAG。它定义了一个双引脚接口（TCK 和 TMS）和一个实现新功能的新 TAP。</p>
+<p><strong>3. SWD（串行线调试）：</strong> SWD 是另一种用于调试微控制器的接口&#x2F;协议。它是一个两针接口：<code>SWDIO（双向）</code>和 <code>SWCLK (clock) </code>它是一个针对 ARM 处理器的特定的协议，它使用 ARM CPU 标准的双向线协议，在 ARM Debug Interface v5 中定义。SWD 的好处是它声称比 JTAG 更高效。</p>
+<h4 id="2-3-I2C"><a href="#2-3-I2C" class="headerlink" title="2.3 I2C"></a>2.3 I2C</h4><p>Inter-Integrated Circuit 是一种短距离通信协议，用于同一板上芯片之间的通信。它是由飞利浦（现在的恩智浦）发明的。它具有主从（多）架构并使用两线总线</p>
+<ul>
+<li>SDA——串行数据</li>
+<li>SCL——串行时钟</li>
+</ul>
+<p>I2C 的用例之一是EEPROM 芯片上连接到微控制器 I2C 引脚存储数据或代码。典型的攻击包括篡改数据、提取敏感信息、破坏数据等。我们应该分析 EEPROM 芯片上的静态数据，并通过嗅探 I2C 通信来执行运行时分析，以了解行为和安全隐患。</p>
+<h4 id="2-4-SPI"><a href="#2-4-SPI" class="headerlink" title="2.4 SPI"></a>2.4 SPI</h4><p>Serial Peripheral Interface 也是一种短距离通信协议，用于同一板上芯片之间的通信。它是由摩托罗拉开发的。它是全双工的，采用主从架构（单主）。与 I2C 相比，它还具有更高的吞吐量。它使用四线串行总线：</p>
+<ul>
+<li>SCLK——串行时钟。其他名称包括 SCK</li>
+<li>MOSI – 主出从入。其他名称包括 SIMO、SDI、DI、DIN、SI、MTSR。</li>
+<li>MISO – 主进从出。其他名称包括 SOMI、SDO、DO、DOUT、SO、MRST。</li>
+<li>SS – 从选择。其他名称包括 S̅S̅、SSEL、CS、C̅S̅、CE、nSS、&#x2F;SS、SS#</li>
+</ul>
+<p>它用于与各种外围设备通话。Flash 和 EEPROM 芯片也使用 SPI。测试和分析的方法类似于 I2C，只是我们有不同的总线接口。</p>
+<h4 id="2-5-USB"><a href="#2-5-USB" class="headerlink" title="2.5 USB"></a>2.5 USB</h4><p>该设备可以具有用于充电或通信的 USB（mini&#x2F;micro等）接口。对于后者，有必要测试接口是否存在已知或未知问题。我们应该嗅探通信以进行运行时分析以及Fuzzing USB 接口以查找未知错误。</p>
+<h4 id="2-6-传感器"><a href="#2-6-传感器" class="headerlink" title="2.6 传感器"></a>2.6 传感器</h4><p>这是一个相当宽泛的名称，我们用来表示物理世界的接口。不一定限于感测型接口。例如，温度传感器将是一个完美的例子，但门锁也是一个没有感知任何东西但通过“锁定&#x2F;解锁”动作控制物理世界的门锁。这些可以根据其操作分为三种类型：</p>
+<ul>
+<li>监视器 Monitor：这与传感器的字面意义更密切相关，即感知或监视物理世界的任何变化。前任。温度、运动、脉搏、血压、胎压等。</li>
+<li>控制器 Control：这些类型的设备以某种方式控制物理世界。如锁、调度器等</li>
+<li>混合 Hybrid：这些是上述两种类型的组合，即温度控制、基于一天中的时间的灯等。这是关键接口之一，因为来自物理世界的所有值和数据都将传输到云中。如果攻击者可以使用格式错误（错误）的数据控制设备，那么整个生态系统都会受到影响，因为所有决策和统计数据都基于这些数据。换句话说，这是物联网生态系统的症结所在。此处错误的值可能会对生态系统做出的决策产生灾难性影响。</li>
+</ul>
+<h4 id="2-7-人机界面"><a href="#2-7-人机界面" class="headerlink" title="2.7 人机界面"></a>2.7 人机界面</h4><p>与传感器接口一样，我们使用 HMI 作为通用术语来定义用户和设备之间的接口，但不限于工业控制系统中使用的术语。这是用户可以用来与设备通信并直接对其进行操作的界面。一些常见的例子是触摸屏、按钮、触摸板等。 测试这个界面以找出任何绕过机制、安全漏洞等很重要。</p>
+<h4 id="2-8-其他硬件接口"><a href="#2-8-其他硬件接口" class="headerlink" title="2.8 其他硬件接口"></a>2.8 其他硬件接口</h4><p>还有许多其他硬件接口用于与设备进行通信。作为渗透测试者，分析和发现所有接口中的缺陷和绕过机制很重要。一些众所周知的接口包括（但不限于）：</p>
+<ul>
+<li>D-Subminiature – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/D-subminiature">https://en.wikipedia.org/wiki/D-subminiature </a></li>
+<li>推荐标准（RS232、RS485 等）– 有关 RS 协议的更多详细信息，请访问 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/EIA_standards">https://en.wikipedia.org/wiki/EIA_standards </a></li>
+<li>车载诊断 (OBD) – <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/On-board_diagnostics">https://en.wikipedia.org/wiki/On-board_diagnostics </a></li>
+</ul>
+<h3 id="3-网络通讯接口"><a href="#3-网络通讯接口" class="headerlink" title="3. 网络通讯接口"></a>3. 网络通讯接口</h3><p>该接口允许设备与虚拟世界的其余部分通信，包括传感器网络、云和移动设备。负责网络通信的硬件接口可能有自己独立的微控制器&#x2F;固件来提供通信功能。这种情况下的攻击面是实现低级通信的固件或驱动程序代码。</p>
+<h4 id="3-1-WIFI无线网络"><a href="#3-1-WIFI无线网络" class="headerlink" title="3.1 WIFI无线网络"></a>3.1 WIFI无线网络</h4><p>wifi 接口有一些已知问题。从攻击面的角度来看，攻击 wifi 芯片方法包括损坏它、DOS、绕过安全限制或代码执行会很有趣。</p>
+<h4 id="3-2-以太网"><a href="#3-2-以太网" class="headerlink" title="3.2 以太网"></a>3.2 以太网</h4><p>以太网接口与 wifi 接口一样，也存在低级 TCP&#x2F;IP 堆栈漏洞以及硬件实现漏洞和类似的攻击向量。</p>
+<h4 id="3-3-无线电"><a href="#3-3-无线电" class="headerlink" title="3.3 无线电"></a>3.3 无线电</h4><p>考虑到许多物联网产品已转向&#x2F;正在使用无线电通信构建，无线电接口已成为最重要的攻击面之一。这种偏好源于这样一个事实，即在许多情况下使用无线电更有效比通过 Wifi&#x2F;有线网络连接。我将 Wifi 单独分类而不是在本节中的原因主要是为了明确区分可以直接连接到互联网的设备（Wifi&#x2F;有线）和需要网关（例如智能集线器）的设备，该网关同时实现Radio以及Wifi&#x2F;Wired接口，分别与传感器和互联网进行通信。 从实际通信的角度来看，可以将其视为两种不同的通信方式：</p>
+<p><strong>1. 简单&#x2F;非结构化：</strong> 这种类型通常用于简单的产品，如百叶窗、锁、门铃等。简单和非结构化是指它使用简单（主要是专有）数据（流）并通过无线电接口发送它。作为渗透测试人员，您需要对通信进行逆向工程以找出实现上的缺陷。使用无线电嗅探硬件工具（如 SDR（软件定义无线电）等）很容易嗅探无线电通信。</p>
+<p><strong>2. 复杂&#x2F;结构化：</strong> 复杂和结构化通信意味着它使用结构化数据包进行无线电通信，这些数据包很复杂，因为除了数据之外，它们还携带有关协议的附加和元信息。由于高效、标准化、经济的芯片、实施的便利性，这些协议在物联网世界中非常有名。同样，有多种工具可用于嗅探和解析协议以提取所发送的应用程序特定数据。一些常见的协议包括：</p>
+<ul>
+<li>蓝牙（和 BLE）</li>
+<li>ZigBee</li>
+<li>Z波</li>
+<li>NFC</li>
+<li>RFID</li>
+<li>LORA</li>
+<li>Wireless HART</li>
+</ul>
+<hr>
+<h1 id="物联网10大安全漏洞"><a href="#物联网10大安全漏洞" class="headerlink" title="物联网10大安全漏洞"></a>物联网10大安全漏洞</h1><p><strong>译自<a target="_blank" rel="noopener" href="https://payatu.com/masterclass/iot-security-part-1-101-iot-introduction-architecture/">原文 </a></strong></p>
+<p>说到十大漏洞，首先想到的是OWASP。他们是定义 Web 和移动应用 10 大漏洞的先驱。 OWASP 社区多年来为定义应用程序安全问题、为行业提供免费教程和开源工具以减轻风险和漏洞所做的工作。他们的网站 <a target="_blank" rel="noopener" href="https://www.owasp.org/">https://www.owasp.org </a></p>
+<p>OWASP 还启动了物联网安全计划，社区定义了物联网攻击面和物联网前 10 大漏洞，以及Web和移动设备10大漏洞。很快它就会成为学习物联网安全内容的绝佳场所。</p>
+<p>OWASP网站物联网安全相关内容如下：</p>
+<ul>
+<li>OWASP Web Top 10项目：<a target="_blank" rel="noopener" href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project </a></li>
+<li>OWASP Mobile Top 10项目：<a target="_blank" rel="noopener" href="https://www.owasp.org/index.php/OWASP_Mobile_Security_Project">https://www.owasp.org/index.php/OWASP_Mobile_Security_Project </a></li>
+<li>OWASP物联网项目：https : <a target="_blank" rel="noopener" href="http://www.owasp.org/index.php/OWASP_Internet_of_Things_Project">www.owasp.org/index.php/OWASP_Internet_of_Things_Project </a></li>
+<li>OWASP 物联网攻击面：<a target="_blank" rel="noopener" href="http://www.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Attack_Surface_Areas">https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab&#x3D;IoT_Attack_Surface_Areas </a></li>
+<li>OWASP 物联网十大漏洞：<a target="_blank" rel="noopener" href="http://www.owasp.org/index.php/Top_10_IoT_Vulnerabilities_">https://www.owasp.org/index.php/Top_10_IoT_Vulnerabilities_ </a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wxt6666.github.io">Chris</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wxt6666.github.io/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/">https://wxt6666.github.io/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://wxt6666.github.io" target="_blank">好好学习 天天向上</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/">物联网</a></div><div class="post-share"><div class="social-share" data-image="/img/123.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="prev-post pull-left" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习"><img class="cover" src="/img/12345.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">汇编学习</div></div></a><a class="next-post pull-right" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向"><img class="cover" src="/img/123.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">通信和固件安全方向</div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src="/img/1023.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Chris</div><div class="author-info-description">CHRIS学习记录</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxt6666" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%91%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">物联网介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%A9%E8%81%94%E7%BD%91%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">什么是物联网？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E9%87%8C%E4%BD%BF%E7%94%A8%E4%BA%86%E7%89%A9%E8%81%94%E7%BD%91%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">哪里使用了物联网？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%91%E6%94%BB%E5%87%BB%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">物联网攻击面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">移动应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91"><span class="toc-number">2.2.</span> <span class="toc-text">云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87"><span class="toc-number">2.3.</span> <span class="toc-text">终端设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1"><span class="toc-number">2.4.</span> <span class="toc-text">通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%91%E8%AE%BE%E5%A4%87%E6%94%BB%E5%87%BB%E9%9D%A2%EF%BC%88%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">物联网设备攻击面（终端设备）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">3.1.</span> <span class="toc-text">1. 数据存储</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-SD-%E5%8D%A1"><span class="toc-number">3.1.1.</span> <span class="toc-text">1.1 SD 卡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-USB"><span class="toc-number">3.1.2.</span> <span class="toc-text">1.2 USB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%9D%9E%E6%98%93%E5%A4%B1%E6%80%A7%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">3.1.3.</span> <span class="toc-text">1.3 非易失性存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E6%98%93%E5%A4%B1%E6%80%A7%E5%86%85%E5%AD%98"><span class="toc-number">3.1.4.</span> <span class="toc-text">1.4 易失性内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-%E5%BE%AE%E6%8E%A7%E5%88%B6%E5%99%A8%E5%86%85%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">3.1.5.</span> <span class="toc-text">1.5 微控制器内部存储器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A1%AC%E4%BB%B6%E9%80%9A%E8%AE%AF%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8D%E6%87%82%EF%BC%9F%EF%BC%9F%EF%BC%9F%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2. 硬件通讯接口（不懂？？？）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-UART%E4%B8%B2%E5%8F%A3"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.1 UART串口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%BE%AE%E6%8E%A7%E5%88%B6%E5%99%A8%E8%B0%83%E8%AF%95%E5%8F%A3"><span class="toc-number">3.2.2.</span> <span class="toc-text">2.2 微控制器调试口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-I2C"><span class="toc-number">3.2.3.</span> <span class="toc-text">2.3 I2C</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-SPI"><span class="toc-number">3.2.4.</span> <span class="toc-text">2.4 SPI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5-USB"><span class="toc-number">3.2.5.</span> <span class="toc-text">2.5 USB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6-%E4%BC%A0%E6%84%9F%E5%99%A8"><span class="toc-number">3.2.6.</span> <span class="toc-text">2.6 传感器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-7-%E4%BA%BA%E6%9C%BA%E7%95%8C%E9%9D%A2"><span class="toc-number">3.2.7.</span> <span class="toc-text">2.7 人机界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-8-%E5%85%B6%E4%BB%96%E7%A1%AC%E4%BB%B6%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.2.8.</span> <span class="toc-text">2.8 其他硬件接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.3.</span> <span class="toc-text">3. 网络通讯接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-WIFI%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.1 WIFI无线网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.2 以太网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E6%97%A0%E7%BA%BF%E7%94%B5"><span class="toc-number">3.3.3.</span> <span class="toc-text">3.3 无线电</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%9110%E5%A4%A7%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E"><span class="toc-number"></span> <span class="toc-text">物联网10大安全漏洞</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/" title="物联网固件安全"><img src="/img/1234.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="物联网固件安全"/></a><div class="content"><a class="title" href="/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/" title="物联网固件安全">物联网固件安全</a><time datetime="2024-10-23T08:56:25.978Z" title="发表于 2024-10-23 16:56:25">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习"><img src="/img/12345.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="汇编学习"/></a><div class="content"><a class="title" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习">汇编学习</a><time datetime="2024-10-23T08:56:14.544Z" title="发表于 2024-10-23 16:56:14">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/" title="IOT安全"><img src="/img/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IOT安全"/></a><div class="content"><a class="title" href="/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/" title="IOT安全">IOT安全</a><time datetime="2024-10-23T08:55:54.036Z" title="发表于 2024-10-23 16:55:54">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向"><img src="/img/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通信和固件安全方向"/></a><div class="content"><a class="title" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向">通信和固件安全方向</a><time datetime="2024-10-12T06:46:13.998Z" title="发表于 2024-10-12 14:46:13">2024-10-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/12/hello-world/" title="Hello World">Hello World</a><time datetime="2024-10-12T05:41:03.016Z" title="发表于 2024-10-12 13:41:03">2024-10-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/123.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Chris</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

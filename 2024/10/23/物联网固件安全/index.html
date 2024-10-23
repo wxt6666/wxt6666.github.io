@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>物联网固件安全 | 好好学习 天天向上</title><meta name="author" content="Chris"><meta name="copyright" content="Chris"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、物联网硬件设备组成1、印制电路板（PCB）​		是电子元器件的支撑体，用来实现各个元器件之间的电器连接。 2、存储芯片​		只读存储器（ROM），只能读出事先存储的数据。 ​		PROM：可编程只读存储器 ​		EPROM：可擦除可编程只读存储器 ​		EEPROM：电擦除可编程只读存储器 ​		FLASHROM：快闪存储器 3、电阻电容二、物联网通信接口1、通用异步收发器（UART）​		发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="物联网固件安全">
+<meta property="og:url" content="https://wxt6666.github.io/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="好好学习 天天向上">
+<meta property="og:description" content="一、物联网硬件设备组成1、印制电路板（PCB）​		是电子元器件的支撑体，用来实现各个元器件之间的电器连接。 2、存储芯片​		只读存储器（ROM），只能读出事先存储的数据。 ​		PROM：可编程只读存储器 ​		EPROM：可擦除可编程只读存储器 ​		EEPROM：电擦除可编程只读存储器 ​		FLASHROM：快闪存储器 3、电阻电容二、物联网通信接口1、通用异步收发器（UART）​		发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wxt6666.github.io/img/1234.jpg">
+<meta property="article:published_time" content="2024-10-23T08:56:25.978Z">
+<meta property="article:modified_time" content="2024-10-23T09:33:16.157Z">
+<meta property="article:author" content="Chris">
+<meta property="article:tag" content="固件安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wxt6666.github.io/img/1234.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wxt6666.github.io/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '物联网固件安全',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-23 17:33:16'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/222.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1023.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 友链</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/1234.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">好好学习 天天向上</span></a><a class="nav-page-title" href="/"><span class="site-name">物联网固件安全</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 友链</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">物联网固件安全</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-10-23T08:56:25.978Z" title="发表于 2024-10-23 16:56:25">2024-10-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-23T09:33:16.157Z" title="更新于 2024-10-23 17:33:16">2024-10-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/">固件安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、物联网硬件设备组成"><a href="#一、物联网硬件设备组成" class="headerlink" title="一、物联网硬件设备组成"></a>一、物联网硬件设备组成</h2><h3 id="1、印制电路板（PCB）"><a href="#1、印制电路板（PCB）" class="headerlink" title="1、印制电路板（PCB）"></a>1、印制电路板（PCB）</h3><p>​		是电子元器件的支撑体，用来实现各个元器件之间的电器连接。</p>
+<h3 id="2、存储芯片"><a href="#2、存储芯片" class="headerlink" title="2、存储芯片"></a>2、存储芯片</h3><p>​		只读存储器（ROM），只能读出事先存储的数据。</p>
+<p>​		PROM：可编程只读存储器</p>
+<p>​		EPROM：可擦除可编程只读存储器</p>
+<p>​		EEPROM：电擦除可编程只读存储器</p>
+<p>​		FLASHROM：快闪存储器</p>
+<h3 id="3、电阻电容"><a href="#3、电阻电容" class="headerlink" title="3、电阻电容"></a>3、电阻电容</h3><h2 id="二、物联网通信接口"><a href="#二、物联网通信接口" class="headerlink" title="二、物联网通信接口"></a>二、物联网通信接口</h2><h3 id="1、通用异步收发器（UART）"><a href="#1、通用异步收发器（UART）" class="headerlink" title="1、通用异步收发器（UART）"></a>1、通用异步收发器（UART）</h3><p>​		发送端UART将来自CPU等控制设备的并行数据转换为串行形式，并将其发送给接收端UART，接收端UART将串行数据换回并行数据，并发送给接受设备。</p>
+<p>​		主要用于主机和辅助设备之间的通信。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/UART%E6%95%B0%E6%8D%AE%E5%8C%85%E6%A0%BC%E5%BC%8F.png"><br>​		为了方便调试，大部分iot设备会将UART引脚引到PCB中。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/pcb%E4%B8%ADUART%E6%8E%A5%E5%8F%A3.png"><br>​		四个引脚：VCC、GND、Rx、Tx。UART接口的通信可以理解为：通过对芯片具有不同功能的引脚输入不同的高低电平，完成对主控设备的控制与调试。</p>
+<h3 id="2、联合测试工作组（JTAG）"><a href="#2、联合测试工作组（JTAG）" class="headerlink" title="2、联合测试工作组（JTAG）"></a>2、联合测试工作组（JTAG）</h3><p>​		主要用于芯片内部的测试以及对系统进行仿真、调试。JTAG是一种嵌入式调试技术，在芯片内部封装了专门的测试电路TAP（测试访问端口），通过专门的JTAG测试工具对内部节点进行测试。</p>
+<p>​		标准JTAG接口定义了一些信号管脚：TMS、TCK、TDI、TDO、TRST、STCK、DBGRQ。提供多种接口标准，常见有10针、14、16、20针等。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/JTAG%E6%8E%A5%E5%8F%A3.png"></p>
+<h3 id="3、通过万用表识别UART引脚"><a href="#3、通过万用表识别UART引脚" class="headerlink" title="3、通过万用表识别UART引脚"></a>3、通过万用表识别UART引脚</h3><p>​		识别GND。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E8%AF%86%E5%88%ABGND.png"><br>​		识别VCC。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E8%AF%86%E5%88%ABVCC.png"><br>识别RX、Tx引脚。</p>
+<h3 id="4、用自动化工具JTAGulator进行识别"><a href="#4、用自动化工具JTAGulator进行识别" class="headerlink" title="4、用自动化工具JTAGulator进行识别"></a>4、用自动化工具JTAGulator进行识别</h3><p>​		是一款可帮助识别目标设备引脚的开源硬件。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/JTAGulator.png"></p>
+<p>​		识别Tx和Rx引脚时，先识别GND引脚，然后连接其他引脚，再通过USB连接到计算机。</p>
+<p>​		用SecureCRT工具与JTAGulator交互，进入交互模式。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/JTAGulator%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F.png"></p>
+<h3 id="5、识别UART波特率"><a href="#5、识别UART波特率" class="headerlink" title="5、识别UART波特率"></a>5、识别UART波特率</h3><p>​		<strong>波特率</strong>：UART设备在通信时，数据的传输速率。</p>
+<p>​		<strong>（1）CH340接口+SecureCRT</strong></p>
+<p>​		使用CH340连接到计算机的USB接口，在SecureCRT软件中多次切换波特率，当交互界面输出正常字符时，此时选的就是当前UART设备的波特率。</p>
+<p>​		<strong>（2）使用JTAGulator进行识别</strong></p>
+<p>​		在SecureCRT页面设置波特率为115200，即可进入交互模式。</p>
+<p>​		在交互界面输入u命令，可在输出对应引脚的同时完成波特率识别。</p>
+<h3 id="6、连接与调试通信串口"><a href="#6、连接与调试通信串口" class="headerlink" title="6、连接与调试通信串口"></a>6、连接与调试通信串口</h3><p>​		CH340接口转换芯片对设备的串口进行调试。</p>
+<p>​		通过输出数据可以看到UART设备完整的启动过程。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/SecureCRT%E8%BE%93%E5%87%BA%E4%BF%A1%E6%81%AF.png"></p>
+<h2 id="三、固件分析"><a href="#三、固件分析" class="headerlink" title="三、固件分析"></a>三、固件分析</h2><p>​		固件（Firmware）是一类特定计算机软件，可为特定硬件提供底层控制。</p>
+<h3 id="1、常见的文件系统"><a href="#1、常见的文件系统" class="headerlink" title="1、常见的文件系统"></a>1、常见的文件系统</h3><ul>
+<li><strong>SquashFS</strong>：供linux内核使用的只读压缩文件系统。（适用长期开机且对稳定性要求高的系统）</li>
+</ul>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E8%AF%86%E5%88%AB%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9FSquashfs.png"></p>
+<ul>
+<li><p><strong>JFFS2</strong>：日志闪存文件系统（适用两种闪存介质的嵌入式系统）</p>
+</li>
+<li><p><strong>YAFFS2</strong>：一个专门为NAND闪存设计的文件系统。</p>
+</li>
+<li><p><strong>UBIFS</strong>：无序区块镜像文件系统，主要用在闪存。</p>
+</li>
+<li><p><strong>CramFS</strong>：专门针对闪存，只读、压缩文件系统····</p>
+</li>
+</ul>
+<h3 id="2、获取固件"><a href="#2、获取固件" class="headerlink" title="2、获取固件"></a>2、获取固件</h3><h4 id="官网获取固件"><a href="#官网获取固件" class="headerlink" title="官网获取固件"></a>官网获取固件</h4><p>​		从设备厂商官网下载固件。</p>
+<h4 id="流量拦截获取固件"><a href="#流量拦截获取固件" class="headerlink" title="流量拦截获取固件"></a>流量拦截获取固件</h4><p>​		在设备升级时，对设备或者控制设备的APP端进行流量代理转发，实施<strong>中间人攻击</strong>。</p>
+<p>​		用到工具：<code>Ettercap、Wireshark、tcpdump</code>。这些工具集成在<code>Kali Linux</code>中。</p>
+<ol>
+<li>kail启动ip转发功能</li>
+<li>启动ettercap图形界面，选择当前网卡</li>
+<li>图形界面找到scan for hosts选项，扫描内网设备</li>
+<li>在扫描后的内网设备的IP和MAC地址列表中，选择当前网络网段地址Add to Target 1，选择要欺骗的设备的IP地址Add to Target 2</li>
+<li>在图形界面菜单栏右侧点击地球图标，选择ARP poisoning，进行ARP欺骗攻击相关配置。然后在弹出的窗口中选中Sniff remote connections复选框，点击ok完成</li>
+<li>在APP端进行升级，然后在kali linux系统上执行tcpdump命令抓取APP端流量</li>
+<li>抓到流量载入wireshark进行流量分析</li>
+<li>根据更新的版本号，进行udp过滤筛选，获取第一次通信数据包追踪流</li>
+<li>在弹出的界面中查找形如地址字样的字符即可</li>
+</ol>
+<p>&#x3D;&#x3D;ARP欺骗的配置流程回顾&#x3D;&#x3D;</p>
+<ul>
+<li><p><strong>Target 1：</strong> 设置为网关的IP地址。</p>
+</li>
+<li><p><strong>Target 2：</strong> 设置为受害设备的IP地址。</p>
+</li>
+<li><p><strong>ARP Poisoning选项：</strong> 勾选”Sniff remote connections”，表示要嗅探目标设备的所有连接。</p>
+</li>
+<li><p>通过这个设置，<strong>Ettercap</strong>会发送伪造的ARP包给网关和受害者，迫使双方把攻击者误认为是彼此的通信对象。这一过程无需用户交互就完成了，因为ARP是<strong>无状态的协议</strong>，不会验证收到的ARP响应包的真实性。</p>
+</li>
+</ul>
+<h4 id="编程器从闪存读取固件"><a href="#编程器从闪存读取固件" class="headerlink" title="编程器从闪存读取固件"></a>编程器从闪存读取固件</h4><p>物理提取，拿夹子夹住闪存提取固件。保存为bin文件。</p>
+<h4 id="串口调试获取固件"><a href="#串口调试获取固件" class="headerlink" title="串口调试获取固件"></a>串口调试获取固件</h4><ol>
+<li>将FT232芯片与要进行串口调试的嵌入式设备通信接口连接，同时将FT232连接到电脑</li>
+<li>打开minicom或者securecrt工具，设置好串口调试接口和波特率，然后开始监听</li>
+<li>minicom启动屏幕捕获功能</li>
+<li>设备接电启动，设备启动过程中按下ctrl+c进入u-boot模式</li>
+<li>在U-boot模式下输入？可以显示所支持的功能和命令，mem、flash命令</li>
+<li>执行flash -layout命令查看闪存布局情况，重点读取固件区域：执行flash read命令将固件读取到内存中的指定空闲位置</li>
+<li>执行mem -dump命令查看Firmware是否被存入指定位置，之后循环读取实际大小即可，最后将得到16进制数据保存为bin格式为文件</li>
+</ol>
+<h3 id="3、提取固件中的文件系统"><a href="#3、提取固件中的文件系统" class="headerlink" title="3、提取固件中的文件系统"></a>3、提取固件中的文件系统</h3><h4 id="（1）系统自带命令提取文件系统"><a href="#（1）系统自带命令提取文件系统" class="headerlink" title="（1）系统自带命令提取文件系统"></a><strong>（1）系统自带命令提取文件系统</strong></h4><p>​		固件中包含Boot Loader、内核、文件系统以及其他内容，其中文件系统包含了需要研究的大部分内容，包括web应用、协议、核心控制程序等，文件系统时着重研究对象。</p>
+<ol>
+<li>hexdump查看.bin文件的十六进制编码，然后使用grep命令在结果中检索hsqs字符串</li>
+<li>使用 dd命令提取固件，<code>dd if=输入文件名 bs=读入/输出大小 skip=从文件头开始跳过块数 of=输出文件名</code></li>
+<li>执行file命令查看解压文件系统是否正确</li>
+<li>执行unsquashfs命令，提取出整个文件系统</li>
+</ol>
+<h4 id="（2）工具提取（binwalk）"><a href="#（2）工具提取（binwalk）" class="headerlink" title="（2）工具提取（binwalk）"></a>（2）工具提取（binwalk）</h4><p>​		1、安装binwalk工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install binwalk</span><br></pre></td></tr></table></figure>
+
+<p>​		2、安装binwalk需要的所有依赖文件和二进制文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./deps.sh</span><br></pre></td></tr></table></figure>
+
+<p>​		3、查看固件详细信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk iot.bin</span><br></pre></td></tr></table></figure>
+
+<p>​		4、自动提取文件系统，-M表示递归分解扫描出来的文件，-e表示按照定义的配置文件中的提取方法从固件中提取探测到的文件系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -Me iot.bin</span><br></pre></td></tr></table></figure>
+
+<p>​		5、binwalk提取后的文件系统以_固件名.extracted命名，打开iot.bin.extracted文件夹，squashfs-root里面存放的就是获取的文件系统</p>
+<h3 id="4、分析文件系统"><a href="#4、分析文件系统" class="headerlink" title="4、分析文件系统"></a>4、分析文件系统</h3><h4 id="（1）使用firmwalker分析文件系统"><a href="#（1）使用firmwalker分析文件系统" class="headerlink" title="（1）使用firmwalker分析文件系统"></a>（1）使用firmwalker分析文件系统</h4><p>​		firmwalker是一个简单的bash脚本，用于搜索和分析固件文件系统。利用linux系统自带的系统命令，查找固件的文件系统，然后罗列出包含敏感字符的文件（敏感字符可定制）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./firmwalker.sh+文件系统目录</span><br></pre></td></tr></table></figure>
+
+<p>​		执行以上命令后，firmwalker会将分析完的结果输出到当前工作日目录下.txt，会将包含passwd、pwd等敏感字符全部列举出来</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/firmwalk%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C.png"></p>
+<h4 id="（2）使用trommel工具分析文件系统"><a href="#（2）使用trommel工具分析文件系统" class="headerlink" title="（2）使用trommel工具分析文件系统"></a>（2）使用trommel工具分析文件系统</h4><p>​		trommel是一款使用python编写的开源工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trommel.py -p 文件系统目录 \-o 输出结果的文件名 -d 输出结果目录</span><br></pre></td></tr></table></figure>
+
+<p>​		trommel检索到的内容比firmwalker更多，还将php文件中shell、system等也列举了出来</p>
+<h4 id="（3）使用emba自动分析固件"><a href="#（3）使用emba自动分析固件" class="headerlink" title="（3）使用emba自动分析固件"></a>（3）使用emba自动分析固件</h4><p>​		emba是一款开源的固件扫描软件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./emba.sh -l ./输出结果 -f 文件系统路径</span><br></pre></td></tr></table></figure>
+
+<p>​		emba会把二进制文件中危险函数列举出来，还可以用来检索CVE漏洞库，从中搜索相应组件或应用在过去出现过的CVE漏洞的编号。</p>
+<h4 id="（4）使用FACT自动分析固件"><a href="#（4）使用FACT自动分析固件" class="headerlink" title="（4）使用FACT自动分析固件"></a>（4）使用FACT自动分析固件</h4><p>​		FACT是一款拥有Web界面的自动化固件测试平台。</p>
+<p>​		可以显示固件包含组件中曾经有哪些历史漏洞。</p>
+<h3 id="5、固件模拟"><a href="#5、固件模拟" class="headerlink" title="5、固件模拟"></a>5、固件模拟</h3><h4 id="（1）QEMU固件模拟"><a href="#（1）QEMU固件模拟" class="headerlink" title="（1）QEMU固件模拟"></a>（1）QEMU固件模拟</h4><p>​			两种运行模式：用户模式、系统模式</p>
+<p>​		<strong>1、使用QEMU用户模式来模拟</strong></p>
+<ul>
+<li><p>执行 cp命令把针对小端MIPS架构的QEMU二进制运行文件qemu-mipsel-static复制到squashfs-root文件夹下</p>
+</li>
+<li><p>使用chroot命令执行QEMU虚拟机，并以模拟方式运行二进制文件</p>
+<p><strong>2、使用QEMU系统模式进行模拟</strong></p>
+</li>
+<li><p>在系统模式下，需要为QEMU指定&#x3D;&#x3D;内核镜像、IDE硬盘镜像、内核参数&#x3D;&#x3D;。</p>
+</li>
+<li><p>去Debian官网下载相应版本，以及对应要求下载内容。</p>
+</li>
+<li><p>配置虚拟网卡，让QEMU虚拟机能够和主机进行网络通信。</p>
+</li>
+<li><p>执行qemu-system-mipsel命令启动QEMU虚拟镜像并设置与主机通信</p>
+</li>
+<li><p>使用<code>tar -zcvf squashfs-root.tar.gz sqashfs-root</code>命令打包之前解压的squashfs-root文件夹，并在当前文件夹下启动HTTP服务供QEMU虚拟机下载当前固件使用</p>
+</li>
+<li><p>开启HTTP服务后，在QEMU虚拟机中执行wget命令下载并解压文件</p>
+</li>
+<li><p>挂载&#x2F;dev、&#x2F;proc目录，执行chroot squashfs-root sh命令，切换squashfs-root为根</p>
+</li>
+</ul>
+<h4 id="（2）Firmware-Analysis-Tooklkit模拟"><a href="#（2）Firmware-Analysis-Tooklkit模拟" class="headerlink" title="（2）Firmware Analysis Tooklkit模拟"></a>（2）Firmware Analysis Tooklkit模拟</h4><p>​		FAT（固件分析工具集）是一个自动化脚本，使用firmadyne工具来模拟固件，firmadyne底层基于QEMU，还集成了其他一些脚本，包含binwalk等工具。</p>
+<ul>
+<li>从GitHub上安装，<code>./setup.sh</code>FAT会自动下载所需要的软件库</li>
+<li>简单配置，打开fat.config将sudo_password修改为当前用户密码</li>
+<li>在FAT目录下运行.&#x2F;fat.py脚本，后接固件的存放路径，&#x3D;&#x3D;即可进行模拟&#x3D;&#x3D;</li>
+<li>在自动配置好FAT程序初始化、固件文件系统提取、镜像创建、网络配置等一序列操作后，FAT会分配一个IP，浏览器输入IP即可进入路由器界面</li>
+</ul>
+<h4 id="（3）FirmAE模拟"><a href="#（3）FirmAE模拟" class="headerlink" title="（3）FirmAE模拟"></a>（3）FirmAE模拟</h4><p>​		FirmAE是在firmadyne基础上开发的一种执行仿真和漏洞分析的全自动框架。引入了仲裁仿真方式，从固件启动、网络、NVRAM、内核以及其他5个方面，总结了导致固件仿真失败的原因并给出具备通用性的方法。</p>
+<ul>
+<li>安装依赖文件.&#x2F;downlaoad.sh，安装脚本.&#x2F;install.sh，初始化操作.&#x2F;init.sh</li>
+<li>下载固件到FirmAE目录下的firmwares目录内</li>
+<li>执行run.sh脚本对固件进行模拟</li>
+<li>FirmAE会先自动分配一个虚拟网卡，并配置相关IP，然后开始模拟固件</li>
+<li>输入分配的IP地址，即可访问对应路由器的管理界面</li>
+</ul>
+<h3 id="6、固件解密"><a href="#6、固件解密" class="headerlink" title="6、固件解密"></a>6、固件解密</h3><h4 id="（1）解密方法1"><a href="#（1）解密方法1" class="headerlink" title="（1）解密方法1"></a>（1）解密方法1</h4><p>​		设备在出厂时未加密v1.0，解密程序与未加密版本的新版本固件为v1.1，此后发布的固件为加密固件v1.2。我们可以从固件v1.1中获取解密程序，用它来解密v1.2版本固件。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E5%8A%A0%E5%AF%86%E6%96%B9%E6%B3%951.png"></p>
+<h4 id="（2）解密方法2"><a href="#（2）解密方法2" class="headerlink" title="（2）解密方法2"></a>（2）解密方法2</h4><p>​		设备固件在原始版本中进行了加密，厂商决定更改加密方案并发布一个未加密的新固件v1.2，其中包含了新版本解密程序。</p>
+<p>​		在更新固件版本前，需要先看新固件版本的发布通告，固件升级到最新版前，需要先升级到固件一个中间版本，中间版本是未加密的固件版本，通过中间版本固件进行升级可以获得解密程序。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F2.png"></p>
+<h4 id="（3）解密方法3"><a href="#（3）解密方法3" class="headerlink" title="（3）解密方法3"></a>（3）解密方法3</h4><p>​		原始版本进行了加密，厂商决定更改加密方案并发布一个带新版解密程序的中间版迭代加密固件，这时候很难获得解密程序。</p>
+<p>​		对加密后的固件解密很困难，这种情况一种思路是，购买设备并使用JTAG、UART调试等方式，从设备硬件中提取固件中的文件系统，对固件进行更深层次的分析，尝试对加密固件进行破解。</p>
+<p><img src="/img/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F3.png"></p>
+<h4 id="（4）对加密固件解密"><a href="#（4）对加密固件解密" class="headerlink" title="（4）对加密固件解密"></a>（4）对加密固件解密</h4><p>​		binwalk -E命令查看该固件的熵值。熵值计算是确认给定的字节序列是否压缩或加密的有效手段。熵值越大越有可能是加密或者压缩过的。</p>
+<ul>
+<li>查看官网固件升级文档中的信息，去下载中间版本固件</li>
+<li>用grep命令在中间版本固件中搜索update、firmware、upgrade、download等关键字符</li>
+<li>通过筛查关键字符，找到关键下载文件，从该文件中找到固件解密的代码信息</li>
+<li>按照提示进行操作，查找相应文件和参数，在QEMU下模拟</li>
+<li>模拟后即可对加密固件解密，提取文件系统</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wxt6666.github.io">Chris</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wxt6666.github.io/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/">https://wxt6666.github.io/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://wxt6666.github.io" target="_blank">好好学习 天天向上</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/">固件安全</a></div><div class="post-share"><div class="social-share" data-image="/img/1234.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="next-post pull-full" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习"><img class="cover" src="/img/12345.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">汇编学习</div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向"><img class="cover" src="/img/123.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-10-12</div><div class="title">通信和固件安全方向</div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info is-center"><div class="avatar-img"><img src="/img/1023.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Chris</div><div class="author-info-description">CHRIS学习记录</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/wxt6666" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%89%A9%E8%81%94%E7%BD%91%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87%E7%BB%84%E6%88%90"><span class="toc-number">1.</span> <span class="toc-text">一、物联网硬件设备组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%8D%B0%E5%88%B6%E7%94%B5%E8%B7%AF%E6%9D%BF%EF%BC%88PCB%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1、印制电路板（PCB）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AD%98%E5%82%A8%E8%8A%AF%E7%89%87"><span class="toc-number">1.2.</span> <span class="toc-text">2、存储芯片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%94%B5%E9%98%BB%E7%94%B5%E5%AE%B9"><span class="toc-number">1.3.</span> <span class="toc-text">3、电阻电容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%89%A9%E8%81%94%E7%BD%91%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.</span> <span class="toc-text">二、物联网通信接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E7%94%A8%E5%BC%82%E6%AD%A5%E6%94%B6%E5%8F%91%E5%99%A8%EF%BC%88UART%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1、通用异步收发器（UART）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%81%94%E5%90%88%E6%B5%8B%E8%AF%95%E5%B7%A5%E4%BD%9C%E7%BB%84%EF%BC%88JTAG%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2、联合测试工作组（JTAG）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%80%9A%E8%BF%87%E4%B8%87%E7%94%A8%E8%A1%A8%E8%AF%86%E5%88%ABUART%E5%BC%95%E8%84%9A"><span class="toc-number">2.3.</span> <span class="toc-text">3、通过万用表识别UART引脚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7JTAGulator%E8%BF%9B%E8%A1%8C%E8%AF%86%E5%88%AB"><span class="toc-number">2.4.</span> <span class="toc-text">4、用自动化工具JTAGulator进行识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E8%AF%86%E5%88%ABUART%E6%B3%A2%E7%89%B9%E7%8E%87"><span class="toc-number">2.5.</span> <span class="toc-text">5、识别UART波特率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E8%BF%9E%E6%8E%A5%E4%B8%8E%E8%B0%83%E8%AF%95%E9%80%9A%E4%BF%A1%E4%B8%B2%E5%8F%A3"><span class="toc-number">2.6.</span> <span class="toc-text">6、连接与调试通信串口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9B%BA%E4%BB%B6%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">三、固件分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.1.</span> <span class="toc-text">1、常见的文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%8E%B7%E5%8F%96%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">2、获取固件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%98%E7%BD%91%E8%8E%B7%E5%8F%96%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.2.1.</span> <span class="toc-text">官网获取固件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%81%E9%87%8F%E6%8B%A6%E6%88%AA%E8%8E%B7%E5%8F%96%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.2.2.</span> <span class="toc-text">流量拦截获取固件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E5%99%A8%E4%BB%8E%E9%97%AA%E5%AD%98%E8%AF%BB%E5%8F%96%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.2.3.</span> <span class="toc-text">编程器从闪存读取固件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E8%B0%83%E8%AF%95%E8%8E%B7%E5%8F%96%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.2.4.</span> <span class="toc-text">串口调试获取固件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%8F%90%E5%8F%96%E5%9B%BA%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.3.</span> <span class="toc-text">3、提取固件中的文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6%E5%91%BD%E4%BB%A4%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.3.1.</span> <span class="toc-text">（1）系统自带命令提取文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%B7%A5%E5%85%B7%E6%8F%90%E5%8F%96%EF%BC%88binwalk%EF%BC%89"><span class="toc-number">3.3.2.</span> <span class="toc-text">（2）工具提取（binwalk）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E6%9E%90%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.4.</span> <span class="toc-text">4、分析文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%BD%BF%E7%94%A8firmwalker%E5%88%86%E6%9E%90%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.4.1.</span> <span class="toc-text">（1）使用firmwalker分析文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BD%BF%E7%94%A8trommel%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.4.2.</span> <span class="toc-text">（2）使用trommel工具分析文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%BD%BF%E7%94%A8emba%E8%87%AA%E5%8A%A8%E5%88%86%E6%9E%90%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.4.3.</span> <span class="toc-text">（3）使用emba自动分析固件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E4%BD%BF%E7%94%A8FACT%E8%87%AA%E5%8A%A8%E5%88%86%E6%9E%90%E5%9B%BA%E4%BB%B6"><span class="toc-number">3.4.4.</span> <span class="toc-text">（4）使用FACT自动分析固件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F"><span class="toc-number">3.5.</span> <span class="toc-text">5、固件模拟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89QEMU%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F"><span class="toc-number">3.5.1.</span> <span class="toc-text">（1）QEMU固件模拟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89Firmware-Analysis-Tooklkit%E6%A8%A1%E6%8B%9F"><span class="toc-number">3.5.2.</span> <span class="toc-text">（2）Firmware Analysis Tooklkit模拟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89FirmAE%E6%A8%A1%E6%8B%9F"><span class="toc-number">3.5.3.</span> <span class="toc-text">（3）FirmAE模拟</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E5%9B%BA%E4%BB%B6%E8%A7%A3%E5%AF%86"><span class="toc-number">3.6.</span> <span class="toc-text">6、固件解密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%951"><span class="toc-number">3.6.1.</span> <span class="toc-text">（1）解密方法1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%952"><span class="toc-number">3.6.2.</span> <span class="toc-text">（2）解密方法2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%A7%A3%E5%AF%86%E6%96%B9%E6%B3%953"><span class="toc-number">3.6.3.</span> <span class="toc-text">（3）解密方法3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%AF%B9%E5%8A%A0%E5%AF%86%E5%9B%BA%E4%BB%B6%E8%A7%A3%E5%AF%86"><span class="toc-number">3.6.4.</span> <span class="toc-text">（4）对加密固件解密</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/" title="物联网固件安全"><img src="/img/1234.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="物联网固件安全"/></a><div class="content"><a class="title" href="/2024/10/23/%E7%89%A9%E8%81%94%E7%BD%91%E5%9B%BA%E4%BB%B6%E5%AE%89%E5%85%A8/" title="物联网固件安全">物联网固件安全</a><time datetime="2024-10-23T08:56:25.978Z" title="发表于 2024-10-23 16:56:25">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习"><img src="/img/12345.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="汇编学习"/></a><div class="content"><a class="title" href="/2024/10/23/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A0%2010.12/" title="汇编学习">汇编学习</a><time datetime="2024-10-23T08:56:14.544Z" title="发表于 2024-10-23 16:56:14">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/" title="IOT安全"><img src="/img/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IOT安全"/></a><div class="content"><a class="title" href="/2024/10/23/IOT%E5%AE%89%E5%85%A8%2010.12/" title="IOT安全">IOT安全</a><time datetime="2024-10-23T08:55:54.036Z" title="发表于 2024-10-23 16:55:54">2024-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向"><img src="/img/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通信和固件安全方向"/></a><div class="content"><a class="title" href="/2024/10/12/%E8%BD%A6%E8%81%94%E7%BD%91%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%9B%BA%E4%BB%B6%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E9%9B%86%E6%88%90%E7%B3%BB%E7%BB%9F%2010.11/" title="通信和固件安全方向">通信和固件安全方向</a><time datetime="2024-10-12T06:46:13.998Z" title="发表于 2024-10-12 14:46:13">2024-10-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/12/hello-world/" title="Hello World">Hello World</a><time datetime="2024-10-12T05:41:03.016Z" title="发表于 2024-10-12 13:41:03">2024-10-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/1234.jpg);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Chris</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
